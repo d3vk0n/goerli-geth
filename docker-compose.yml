@@ -11,9 +11,11 @@ services:
     ports:
       - "30803:30803/tcp"
       - "30803:30803/udp"
+      - "8535:8545"
+      - "8536:8546"
     restart: unless-stopped
     environment:
-      - "EXTRA_OPTION=--http.api eth,engine,net,web3,txpool"
+      - "EXTRA_OPTION=--goerli --http --http.corsdomain '*' --http.addr 0.0.0.0 --http.api admin,eth,debug,net,txpool,personal,web3 --ws --ws.addr 0.0.0.0 --ws.port 8546 --ws.origins * --ws.api admin,eth,debug,net,txpool,personal,web3 --syncmode 'snap' --metrics"
       - P2P_PORT=30803
       - SYNCMODE
 volumes:
